@@ -1,4 +1,4 @@
-## Manually scaling
+# Manual scaling
 
 - Creating deployment - `nginx-deployment` -
 
