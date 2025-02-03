@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumer-deployment
+  namespace: kafka
+spec:
+  replicas: 0 # Initially set to 0 as KEDA will scale this
+  selector:
+    matchLabels:
+      app: consumer
+  template:
+    metadata:
+      labels:
+        app: consumer
+    spec:
+      containers:
+      - name: kafka-consumer
+        image: bitnami/kafka:latest
+        command:
+        - /bin/bash
+        - -c
+        - |
+          echo "Starting consumer..."
+          kafka-console-consumer.sh --bootstrap-server kafka.kafka.svc.cluster.local:9092 --topic mytopic
